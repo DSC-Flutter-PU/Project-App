@@ -35,6 +35,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
+    super.initState();
+
     job1.putIfAbsent("name", () => "Trim my fence");
     job1.putIfAbsent("description", () => "Need someone to trim my fence");
     job1.putIfAbsent("date", () => DateTime.now().year.toString());
