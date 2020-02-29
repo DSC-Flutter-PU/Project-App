@@ -12,7 +12,6 @@ dependencies:
   cupertino_icons: ^0.1.2
   sqflite : ^1.2.0
   path : ^1.6.2
-  shared_preferences : ^0.5.6+2
   password : ^1.0.0
 
 dev_dependencies:
