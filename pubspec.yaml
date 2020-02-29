@@ -10,9 +10,9 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^0.1.2
-  sqflite : ^1.2.0
-  path : ^1.6.2
-  password : ^1.0.0
+  sqflite : any
+  path : any
+  password : any
 
 dev_dependencies:
   flutter_test:
