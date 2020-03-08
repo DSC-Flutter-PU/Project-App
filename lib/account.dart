@@ -1,3 +1,4 @@
+import 'package:employeeapp/data/Employee.dart';
 import 'package:flutter/material.dart';
 
 class Account extends StatefulWidget {
@@ -6,6 +7,15 @@ class Account extends StatefulWidget {
 }
 
 class _AccountState extends State<Account> {
+  Employee fakeAccount = new Employee(
+    name: "Dr Disrespect",
+    username: "drdr",
+    password: "5dwR422",
+    age: 22,
+    rating: 4.2,
+    count: 2,
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +48,7 @@ class _AccountState extends State<Account> {
                       width: 15.0,
                     ),
                     Text(
-                      "Dr Disrespect",
+                      fakeAccount.name,
                       style: TextStyle(
                         fontSize: 22.0,
                       ),
@@ -60,7 +70,7 @@ class _AccountState extends State<Account> {
                       width: 15.0,
                     ),
                     Text(
-                      "4/100",
+                      fakeAccount.rating.toString(),
                       style: TextStyle(
                         fontSize: 22.0,
                       ),

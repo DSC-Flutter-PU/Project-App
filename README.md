@@ -1,12 +1,16 @@
 ![Test, Build and Release apk](https://github.com/DSC-Flutter-PU/Project-App/workflows/Test,%20Build%20and%20Release%20apk/badge.svg)
 
-# employeeapp
+# APP
+> todo find an app name 
 
-A new Flutter application.
+Employee app project for Developer Student Clubs PU.
 
 ## Getting Started
-
-This project is a starting point for a Flutter application.
+1. Fork the repo
+2. Clone the repo on your machine
+3. Work on a non-master branch
+4. Push the code, and create a Pull Request.
+5. Your code will be merged shortly. 
 
 A few resources to get you started if this is your first Flutter project:
 
