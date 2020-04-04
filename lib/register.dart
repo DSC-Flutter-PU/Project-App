@@ -1,4 +1,4 @@
-import 'package:employeeapp/main.dart';
+import 'package:employeeapp/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -283,12 +283,12 @@ class _RegisterState extends State<Register> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => MyHomePage()));
+                                  builder: (context) => Login()));
                         },
                         child: RichText(
                           text: TextSpan(children: [
                             TextSpan(
-                              text: 'Already have an Account?',
+                              text: 'Already have an Account? ',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 15.0,
