@@ -12,6 +12,9 @@ Employee app project for Developer Student Clubs PU.
 4. Push the code, and create a Pull Request.
 5. Your code will be merged shortly. 
 
+Your code might show failing on the Actions, this might be mainly due to the commit having no tag,
+No problemo, it will be fixed
+
 
 > Please choose a task among the following to fix
 ## Tasks
