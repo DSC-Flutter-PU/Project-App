@@ -1,3 +1,4 @@
+import 'package:employeeapp/register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -14,11 +15,11 @@ class _LoginState extends State<Login> {
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
-              child: GestureDetector(
-                onTap: () => FocusScope.of(context).unfocus(),
-                              child: Stack(
-          children: <Widget>[
-            Container(
+        child: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Stack(
+            children: <Widget>[
+              Container(
                 height: double.infinity,
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -33,8 +34,8 @@ class _LoginState extends State<Login> {
                   ],
                   stops: [0.1, 0.4, 0.7, 0.9],
                 )),
-            ),
-            Container(
+              ),
+              Container(
                 height: double.infinity,
                 child: SingleChildScrollView(
                   physics: AlwaysScrollableScrollPhysics(),
@@ -75,9 +76,9 @@ class _LoginState extends State<Login> {
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Colors.white,
-                                    ),
-                                    borderRadius: BorderRadius.circular(12.0), 
                                   ),
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
                                 contentPadding: EdgeInsets.only(top: 14.0),
                                 prefixIcon: Icon(
                                   Icons.email,
@@ -114,9 +115,9 @@ class _LoginState extends State<Login> {
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Colors.white,
-                                    ),
-                                    borderRadius: BorderRadius.circular(12.0), 
-                                  ), 
+                                  ),
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
                                 contentPadding: EdgeInsets.only(top: 14.0),
                                 prefixIcon: Icon(
                                   Icons.lock,
@@ -134,7 +135,8 @@ class _LoginState extends State<Login> {
                       Container(
                         alignment: Alignment.centerRight,
                         child: FlatButton(
-                          onPressed: () => print('Forgot Password Button Pressed'),
+                          onPressed: () =>
+                              print('Forgot Password Button Pressed'),
                           padding: EdgeInsets.only(right: 5.0),
                           child: Text(
                             'Forgot Password?',
@@ -148,7 +150,8 @@ class _LoginState extends State<Login> {
                         child: Row(
                           children: <Widget>[
                             Theme(
-                              data: ThemeData(unselectedWidgetColor: Colors.white),
+                              data: ThemeData(
+                                  unselectedWidgetColor: Colors.white),
                               child: Checkbox(
                                 value: _rememberME,
                                 checkColor: Colors.black,
@@ -195,13 +198,17 @@ class _LoginState extends State<Login> {
                         height: 20.0,
                       ),
                       GestureDetector(
-                        onTap: () => print('Sign up Button Pressed'),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Register()));
+                        },
                         child: RichText(
                           text: TextSpan(children: [
                             TextSpan(
-                              text: 'Don\'t have an Account?',
-                              style:
-                               TextStyle(
+                              text: 'Don\'t have an Account? ',
+                              style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 15.0,
                                 fontWeight: FontWeight.w500,
@@ -221,10 +228,10 @@ class _LoginState extends State<Login> {
                     ],
                   ),
                 ),
-            ),
-          ],
-        ),
               ),
+            ],
+          ),
+        ),
       ),
     );
   }
