@@ -1,3 +1,4 @@
+import 'package:employeeapp/register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -197,11 +198,16 @@ class _LoginState extends State<Login> {
                         height: 20.0,
                       ),
                       GestureDetector(
-                        onTap: () => print('Sign up Button Pressed'),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Register()));
+                        },
                         child: RichText(
                           text: TextSpan(children: [
                             TextSpan(
-                              text: 'Don\'t have an Account?',
+                              text: 'Don\'t have an Account? ',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 15.0,
