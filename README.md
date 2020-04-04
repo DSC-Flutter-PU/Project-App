@@ -12,6 +12,14 @@ Employee app project for Developer Student Clubs PU.
 4. Push the code, and create a Pull Request.
 5. Your code will be merged shortly. 
 
+
+> Please choose a task among the following to fix
+## Tasks
+1. Fix Register page
+2. Fix Main page
+3. Connect pages to database
+4. ...
+
 A few resources to get you started if this is your first Flutter project:
 
 - [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
