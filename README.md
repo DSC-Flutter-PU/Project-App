@@ -13,7 +13,8 @@ Employee app project for Developer Student Clubs PU.
 5. Your code will be merged shortly. 
 
 Your code might show failing on the Actions, this might be mainly due to the commit having no tag,
-No problemo, it will be fixed
+No problemo, it will be fixed.
+Active releases can be found [here.](https://github.com/DSC-Flutter-PU/Project-App/releases)
 
 
 > Please choose a task among the following to fix
