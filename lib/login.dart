@@ -13,6 +13,9 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Login'),
+      ),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: GestureDetector(
@@ -46,12 +49,14 @@ class _LoginState extends State<Login> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text(
-                        'Sign In',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
+                      Container(
+                        child: Text(
+                          'Sign In',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 30.0,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       SizedBox(height: 30.0),
@@ -73,11 +78,10 @@ class _LoginState extends State<Login> {
                               style: TextStyle(color: Colors.white),
                               decoration: InputDecoration(
                                 border: InputBorder.none,
-                                focusedBorder: OutlineInputBorder(
+                                focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Colors.white,
                                   ),
-                                  borderRadius: BorderRadius.circular(12.0),
                                 ),
                                 contentPadding: EdgeInsets.only(top: 14.0),
                                 prefixIcon: Icon(
@@ -112,11 +116,10 @@ class _LoginState extends State<Login> {
                               style: TextStyle(color: Colors.white),
                               decoration: InputDecoration(
                                 border: InputBorder.none,
-                                focusedBorder: OutlineInputBorder(
+                                focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Colors.white,
                                   ),
-                                  borderRadius: BorderRadius.circular(12.0),
                                 ),
                                 contentPadding: EdgeInsets.only(top: 14.0),
                                 prefixIcon: Icon(
@@ -176,7 +179,7 @@ class _LoginState extends State<Login> {
                         padding: EdgeInsets.symmetric(vertical: 25.0),
                         width: double.infinity,
                         child: RaisedButton(
-                          elevation: 5.0,
+                          elevation: 10.0,
                           onPressed: () => print('Login Button Pressed'),
                           padding: EdgeInsets.all(15.0),
                           shape: RoundedRectangleBorder(
@@ -188,7 +191,30 @@ class _LoginState extends State<Login> {
                             style: TextStyle(
                               color: Colors.grey,
                               letterSpacing: 1.0,
-                              fontSize: 15.0,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(vertical: 25.0),
+                        width: double.infinity,
+                        child: RaisedButton(
+                          elevation: 10.0,
+                          onPressed: () =>
+                              print('Login with Google Button Pressed'),
+                          padding: EdgeInsets.all(15.0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25.0),
+                          ),
+                          color: Colors.white,
+                          child: Text(
+                            'Log In with Google',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              letterSpacing: 1.0,
+                              fontSize: 16.0,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
