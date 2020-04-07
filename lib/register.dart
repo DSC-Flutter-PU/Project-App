@@ -11,11 +11,13 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   DatabaseClient databaseClient;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController nameController = new TextEditingController();
   TextEditingController emailController = new TextEditingController();
   TextEditingController phoneController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
   TextEditingController confPasswordController = new TextEditingController();
+  bool passMatch = false;
 
   @override
   void initState() {
@@ -26,24 +28,45 @@ class _RegisterState extends State<Register> {
       db.create();
 
       databaseClient = db;
-      if (!mounted) setState(() {});
+      if (mounted) setState(() {});
     }
   }
+
+  // call this method to check if the passwords fields match
+  bool passwordsCheck() =>
+      passwordController.text == confPasswordController.text;
+
 
   void addUser(String name, String email, String phone, String password) async {
     Employee employee =
         new Employee(name: name, username: email, password: password, age: 18);
 
-    int status = await databaseClient.addEmployee(employee);
-    print("Status: $status");
+    try {
+      int status = await databaseClient.addEmployee(employee);
+
+      if (status != null) {
+        // User successfully added to the database, we can navigate to another page
+        // todo save to state
+
+        print("User has been successfully added to db");
+      }
+    } on UserExistsException catch (e) {
+      print(e.message);
+
+      scaffoldKey.currentState.showSnackBar(SnackBar(
+        backgroundColor: Colors.redAccent,
+        content: Text(
+          e.message,
+          style: TextStyle(color: Colors.white),
+        ),
+      ));
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('SignUp'),
-      ),
+      key: scaffoldKey,
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: GestureDetector(
@@ -227,6 +250,13 @@ class _RegisterState extends State<Register> {
                             height: 50.0,
                             child: TextField(
                               controller: passwordController,
+                              onChanged: (String td){
+                                setState(() {
+                                  passwordsCheck()
+                                      ? passMatch = false
+                                      : passMatch = true;
+                                });
+                              },
                               onEditingComplete: () {
                                 // todo perform checks
                               },
@@ -235,12 +265,17 @@ class _RegisterState extends State<Register> {
                                 color: Colors.white,
                               ),
                               decoration: InputDecoration(
+                                errorText: passMatch
+                                    ? "The passwords do not match!"
+                                    : null,
                                 border: InputBorder.none,
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Colors.white,
                                   ),
                                 ),
+                                errorBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.red)),
                                 contentPadding: EdgeInsets.only(top: 14.0),
                                 prefixIcon: Icon(
                                   Icons.lock,
@@ -271,8 +306,12 @@ class _RegisterState extends State<Register> {
                             height: 50.0,
                             child: TextField(
                               controller: confPasswordController,
-                              onEditingComplete: () {
-                                // todo perform checks
+                              onChanged: (String td) {
+                                setState(() {
+                                  passwordsCheck()
+                                      ? passMatch = false
+                                      : passMatch = true;
+                                });
                               },
                               obscureText: true,
                               style: TextStyle(
@@ -310,8 +349,12 @@ class _RegisterState extends State<Register> {
                             String phone = phoneController.text;
                             String password = passwordController.text;
 
-                            if (databaseClient != null)
+                            if (databaseClient != null && passwordsCheck())
                               addUser(name, email, phone, password);
+                            scaffoldKey.currentState.showSnackBar(SnackBar(
+                              backgroundColor: Colors.redAccent,
+                              content: Text("The passwords do not match"),
+                            ));
                           },
                           padding: EdgeInsets.all(15.0),
                           shape: RoundedRectangleBorder(

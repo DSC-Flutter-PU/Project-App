@@ -4,6 +4,26 @@ import 'package:employeeapp/data/Employee.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
+/// Exception thrown when a user is not found
+class User404Exception implements Exception {
+  /// A message describing the error.
+  String message;
+
+  /// Creates a new [User404Exception] with an optional error
+  /// message.
+  User404Exception([this.message]);
+}
+
+/// Exception thrown when a user exists in the database with same name
+class UserExistsException implements Exception {
+  /// A message describing the error.
+  String message;
+
+  /// Creates a new [UserExistsException] with an optional error
+  /// message.
+  UserExistsException([this.message]);
+}
+
 class DatabaseClient {
   Database _database;
 
@@ -45,8 +65,8 @@ class DatabaseClient {
       if (number != 0) {
         // user exists in the database with the name, notify user to choose a
         // new username
-        // todo throw better info
-        return null;
+        throw UserExistsException(
+            "A user exists with the same username, please choose another.");
       }
       // add the user to db
       id = await _database.insert("employees", employee.toMap());

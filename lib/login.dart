@@ -10,6 +10,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   DatabaseClient databaseClient;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   bool _rememberME = false;
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
@@ -27,16 +28,32 @@ class _LoginState extends State<Login> {
     }
   }
 
-  void auth(String email, String password){
-    databaseClient.authenticateUser(email, password);
+  void auth(String email, String password) async {
+    try {
+      int status = await databaseClient.authenticateUser(email, password);
+
+      if (status == 0) {
+        // user has been successfully authenticated, we can navigate to another page
+        // todo save to state
+        print("User has been successfully authenticated");
+      }
+    } on User404Exception catch (e) {
+      print(e.message);
+
+      scaffoldKey.currentState.showSnackBar(SnackBar(
+        backgroundColor:  Colors.redAccent,
+        content: Text(
+          e.message,
+          style: TextStyle(color: Colors.white),
+        ),
+      ));
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Login'),
-      ),
+      key: scaffoldKey,
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: GestureDetector(
@@ -216,7 +233,7 @@ class _LoginState extends State<Login> {
                             String password = passwordController.text;
 
                             // todo perform further checks before inserting to db
-                            if(databaseClient != null){
+                            if (databaseClient != null) {
                               auth(email, password);
                             }
                           },
