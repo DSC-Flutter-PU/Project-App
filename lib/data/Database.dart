@@ -6,7 +6,6 @@ import 'package:sqflite/sqflite.dart';
 
 class DatabaseClient {
   Database _database;
-  Transaction txn;
 
   // creates database instance
   Future create() async {
@@ -22,16 +21,10 @@ class DatabaseClient {
           version,
         ) {
           return db.execute(
-            "CREATE TABLE employees(id INTEGER PRIMARY KEY,name TEXT,username TEXT,password TEXT,creationDate TEXT,rating NUMBER,username TEXT,password TEXT)",
+            """CREATE TABLE employees(id INTEGER PRIMARY KEY,name TEXT,username TEXT,password TEXT,age NUMBER,rating NUMBER,count NUMBER,creationDate TEXT)""",
           );
         },
       );
-    }
-
-    if (txn == null) {
-      await _database.transaction((tx) async {
-        tx = txn;
-      });
     }
   }
 
@@ -39,20 +32,26 @@ class DatabaseClient {
   // e.g Username is already taken error. Todo throw appropriate custom errors here
   Future<int> addEmployee(Employee employee) async {
     int id = employee.id;
-    var count = Sqflite.firstIntValue(
-        await txn.rawQuery("SELECT COUNT(*) FROM employees where id =?", [id]));
+    var count = 0;
+    if (id != null)
+      count = Sqflite.firstIntValue(await _database
+          .rawQuery("SELECT COUNT(*) FROM employees where id =?", [id]));
 
     if (count == 0) {
-      var number = Sqflite.firstIntValue(await txn.rawQuery(
+      var number = Sqflite.firstIntValue(await _database.rawQuery(
           "SELECT COUNT(*) FROM employees where username =?",
           [employee.username]));
 
       if (number != 0) {
+        // user exists in the database with the name, notify user to choose a
+        // new username
+        // todo throw better info
         return null;
       }
-      id = await txn.insert("employees", employee.toMap());
+      // add the user to db
+      id = await _database.insert("employees", employee.toMap());
     } else {
-      id = await txn.update("employees", employee.toMap(),
+      id = await _database.update("employees", employee.toMap(),
           where: "id=?", whereArgs: [employee.id]);
     }
 
@@ -62,11 +61,12 @@ class DatabaseClient {
   // delete employee from database, check if number is not null, else method is not successful,
   // e.g User was not found. Todo throw appropriate custom errors here
   Future<void> deleteEmployee(int employeeId) async {
-    var count = Sqflite.firstIntValue(await txn
+    var count = Sqflite.firstIntValue(await _database
         .rawQuery("SELECT COUNT(*) FROM employees where id =?", [employeeId]));
 
     if (count != 0) {
-      await txn.rawDelete("DELETE FROM employees WHERE id = ?", [employeeId]);
+      await _database
+          .rawDelete("DELETE FROM employees WHERE id = ?", [employeeId]);
 
       return employeeId;
     } else {

@@ -1,3 +1,5 @@
+import 'package:employeeapp/data/Database.dart';
+import 'package:employeeapp/data/Employee.dart';
 import 'package:employeeapp/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,6 +10,34 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  DatabaseClient databaseClient;
+  TextEditingController nameController = new TextEditingController();
+  TextEditingController emailController = new TextEditingController();
+  TextEditingController phoneController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
+  TextEditingController confPasswordController = new TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (databaseClient == null) {
+      DatabaseClient db = new DatabaseClient();
+      db.create();
+
+      databaseClient = db;
+      if (!mounted) setState(() {});
+    }
+  }
+
+  void addUser(String name, String email, String phone, String password) async {
+    Employee employee =
+        new Employee(name: name, username: email, password: password, age: 18);
+
+    int status = await databaseClient.addEmployee(employee);
+    print("Status: $status");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +93,7 @@ class _RegisterState extends State<Register> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            'Names',
+                            'Name',
                             style: TextStyle(
                               color: Colors.white,
                             ),
@@ -73,6 +103,8 @@ class _RegisterState extends State<Register> {
                             alignment: Alignment.centerLeft,
                             height: 50.0,
                             child: TextField(
+                              controller: nameController,
+                              onEditingComplete: () {},
                               style: TextStyle(
                                 color: Colors.white,
                               ),
@@ -112,6 +144,8 @@ class _RegisterState extends State<Register> {
                             alignment: Alignment.centerLeft,
                             height: 50.0,
                             child: TextField(
+                              controller: emailController,
+                              onEditingComplete: () {},
                               style: TextStyle(
                                 color: Colors.white,
                               ),
@@ -151,6 +185,8 @@ class _RegisterState extends State<Register> {
                             alignment: Alignment.centerLeft,
                             height: 50.0,
                             child: TextField(
+                              controller: phoneController,
+                              onEditingComplete: () {},
                               style: TextStyle(
                                 color: Colors.white,
                               ),
@@ -190,6 +226,10 @@ class _RegisterState extends State<Register> {
                             alignment: Alignment.centerLeft,
                             height: 50.0,
                             child: TextField(
+                              controller: passwordController,
+                              onEditingComplete: () {
+                                // todo perform checks
+                              },
                               obscureText: true,
                               style: TextStyle(
                                 color: Colors.white,
@@ -230,6 +270,10 @@ class _RegisterState extends State<Register> {
                             alignment: Alignment.centerLeft,
                             height: 50.0,
                             child: TextField(
+                              controller: confPasswordController,
+                              onEditingComplete: () {
+                                // todo perform checks
+                              },
                               obscureText: true,
                               style: TextStyle(
                                 color: Colors.white,
@@ -260,7 +304,15 @@ class _RegisterState extends State<Register> {
                         width: double.infinity,
                         child: RaisedButton(
                           elevation: 10.0,
-                          onPressed: () => print('Submit Button Pressed'),
+                          onPressed: () {
+                            String name = nameController.text;
+                            String email = emailController.text;
+                            String phone = phoneController.text;
+                            String password = passwordController.text;
+
+                            if (databaseClient != null)
+                              addUser(name, email, phone, password);
+                          },
                           padding: EdgeInsets.all(15.0),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25.0),

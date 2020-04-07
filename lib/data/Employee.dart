@@ -20,6 +20,7 @@ class Employee {
 
   // Constructors
   Employee({
+    int id,
     @required String name,
     @required String username,
     @required String password,
