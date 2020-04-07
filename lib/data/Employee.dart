@@ -69,6 +69,15 @@ class Employee {
     };
   }
 
+  Employee.fromJson(Map data)
+      : this(
+            id: data['id'],
+            name: data['name'],
+            username: data['username'],
+            password: data['password'],
+            age: data['age'],
+            rating: data['rating'].toDouble());
+
   String hashPassword(String originalPassword) {
     return Password.hash(originalPassword, new PBKDF2());
   }

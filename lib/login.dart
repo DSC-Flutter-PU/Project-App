@@ -1,3 +1,4 @@
+import 'package:employeeapp/data/Database.dart';
 import 'package:employeeapp/register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,7 +9,27 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  DatabaseClient databaseClient;
   bool _rememberME = false;
+  TextEditingController emailController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (databaseClient == null) {
+      DatabaseClient db = new DatabaseClient();
+      db.create();
+
+      databaseClient = db;
+      if (!mounted) setState(() {});
+    }
+  }
+
+  void auth(String email, String password){
+    databaseClient.authenticateUser(email, password);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +95,11 @@ class _LoginState extends State<Login> {
                             alignment: Alignment.centerLeft,
                             height: 60.0,
                             child: TextField(
+                              controller: emailController,
+                              onEditingComplete: () {
+                                String email = emailController.text;
+                                // todo perform checks
+                              },
                               keyboardType: TextInputType.emailAddress,
                               style: TextStyle(color: Colors.white),
                               decoration: InputDecoration(
@@ -112,6 +138,11 @@ class _LoginState extends State<Login> {
                             alignment: Alignment.centerLeft,
                             height: 60.0,
                             child: TextField(
+                              controller: passwordController,
+                              onEditingComplete: () {
+                                String password = passwordController.text;
+                                // todo perform checks
+                              },
                               obscureText: true,
                               style: TextStyle(color: Colors.white),
                               decoration: InputDecoration(
@@ -180,7 +211,15 @@ class _LoginState extends State<Login> {
                         width: double.infinity,
                         child: RaisedButton(
                           elevation: 10.0,
-                          onPressed: () => print('Login Button Pressed'),
+                          onPressed: () {
+                            String email = emailController.text;
+                            String password = passwordController.text;
+
+                            // todo perform further checks before inserting to db
+                            if(databaseClient != null){
+                              auth(email, password);
+                            }
+                          },
                           padding: EdgeInsets.all(15.0),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25.0),
