@@ -26,9 +26,12 @@ flutter:
   assets:
     - images/dr.jpeg
 
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+  fonts:
+     - family: PlayfairDisplay
+       fonts:
+         - asset: fonts/PlayfairDisplay-Black.otf
+         - asset: fonts/PlayfairDisplay-Regular.otf
+           style: normal
+
+#         - asset: fonts/PlayfairDisplay-Italic.otf
+#           style: italic
