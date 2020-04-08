@@ -1,5 +1,6 @@
 import 'package:employeeapp/data/Database.dart';
 import 'package:employeeapp/register.dart';
+import 'package:employeeapp/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -90,11 +91,7 @@ class _LoginState extends State<Login> {
                       Container(
                         child: Text(
                           'Sign In',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30.0,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: TitleTextStyle,
                         ),
                       ),
                       SizedBox(height: 30.0),
@@ -103,9 +100,7 @@ class _LoginState extends State<Login> {
                         children: <Widget>[
                           Text(
                             'Email',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
+                            style: TextFieldLabelStyle
                           ),
                           SizedBox(height: 10.0),
                           Container(
@@ -132,9 +127,7 @@ class _LoginState extends State<Login> {
                                   color: Colors.white,
                                 ),
                                 hintText: 'Enter your Email',
-                                hintStyle: TextStyle(
-                                  color: Colors.white,
-                                ),
+                                hintStyle: HintTextStyle
                               ),
                             ),
                           ),
@@ -146,9 +139,7 @@ class _LoginState extends State<Login> {
                         children: <Widget>[
                           Text(
                             'Password',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
+                            style: TextFieldLabelStyle,
                           ),
                           SizedBox(height: 10.0),
                           Container(
@@ -175,9 +166,7 @@ class _LoginState extends State<Login> {
                                   color: Colors.white,
                                 ),
                                 hintText: 'Enter your Password',
-                                hintStyle: TextStyle(
-                                  color: Colors.white,
-                                ),
+                                hintStyle: HintTextStyle,
                               ),
                             ),
                           ),

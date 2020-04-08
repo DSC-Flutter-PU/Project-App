@@ -3,6 +3,7 @@ import 'package:employeeapp/data/Employee.dart';
 import 'package:employeeapp/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'styles.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -104,11 +105,7 @@ class _RegisterState extends State<Register> {
                       Container(
                         child: Text(
                           'Register',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30.0,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: TitleTextStyle
                         ),
                       ),
                       SizedBox(height: 20.0),
@@ -116,10 +113,8 @@ class _RegisterState extends State<Register> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            'Name',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
+                            'Names',
+                            style: TextFieldLabelStyle
                           ),
                           SizedBox(height: 10.0),
                           Container(
@@ -144,9 +139,7 @@ class _RegisterState extends State<Register> {
                                   color: Colors.white,
                                 ),
                                 hintText: 'Enter Name',
-                                hintStyle: TextStyle(
-                                  color: Colors.white,
-                                ),
+                                hintStyle: HintTextStyle,
                               ),
                             ),
                           ),
@@ -158,9 +151,7 @@ class _RegisterState extends State<Register> {
                         children: <Widget>[
                           Text(
                             'Email',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
+                            style: TextFieldLabelStyle
                           ),
                           SizedBox(height: 10.0),
                           Container(
@@ -185,9 +176,7 @@ class _RegisterState extends State<Register> {
                                   color: Colors.white,
                                 ),
                                 hintText: 'Enter Your Email',
-                                hintStyle: TextStyle(
-                                  color: Colors.white,
-                                ),
+                                hintStyle: HintTextStyle,
                               ),
                             ),
                           ),
@@ -199,9 +188,7 @@ class _RegisterState extends State<Register> {
                         children: <Widget>[
                           Text(
                             'Phone',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
+                            style: TextFieldLabelStyle
                           ),
                           SizedBox(height: 10.0),
                           Container(
@@ -226,9 +213,7 @@ class _RegisterState extends State<Register> {
                                   color: Colors.white,
                                 ),
                                 hintText: '+2547********',
-                                hintStyle: TextStyle(
-                                  color: Colors.white,
-                                ),
+                                hintStyle: HintTextStyle,
                               ),
                             ),
                           ),
@@ -240,9 +225,7 @@ class _RegisterState extends State<Register> {
                         children: <Widget>[
                           Text(
                             'Password',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
+                            style: TextFieldLabelStyle,
                           ),
                           SizedBox(height: 10.0),
                           Container(
@@ -282,9 +265,7 @@ class _RegisterState extends State<Register> {
                                   color: Colors.white,
                                 ),
                                 hintText: 'Enter Password',
-                                hintStyle: TextStyle(
-                                  color: Colors.white,
-                                ),
+                                hintStyle: HintTextStyle,
                               ),
                             ),
                           ),
@@ -296,9 +277,7 @@ class _RegisterState extends State<Register> {
                         children: <Widget>[
                           Text(
                             'Confirm Password',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
+                            style: TextFieldLabelStyle,
                           ),
                           SizedBox(height: 10.0),
                           Container(
@@ -330,9 +309,7 @@ class _RegisterState extends State<Register> {
                                   color: Colors.white,
                                 ),
                                 hintText: 'Enter Password to Confirm',
-                                hintStyle: TextStyle(
-                                  color: Colors.white,
-                                ),
+                                hintStyle: HintTextStyle,
                               ),
                             ),
                           ),
