@@ -1,9 +1,9 @@
 import 'package:employeeapp/screens/account.dart';
 import 'package:employeeapp/screens/login.dart';
 import 'package:flutter/material.dart';
-import '../utils/styles.dart';
+import 'utils/styles.dart';
 
-import 'register.dart';
+import 'screens/register.dart';
 
 void main() => runApp(MyApp());
 
@@ -111,13 +111,6 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ListView.builder(
           itemBuilder: ((BuildContext context, int index) {
             return ListTile(
-              leading: Text(
-                (index + 1).toString(),
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 22.0,
-                ),
-              ),
               title: Text(
                 jobs[index]["name"],
                 style: TextStyle(

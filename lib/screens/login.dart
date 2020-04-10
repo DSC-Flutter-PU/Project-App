@@ -1,5 +1,5 @@
 import 'package:employeeapp/models/Database.dart';
-import 'package:employeeapp/screens/main.dart';
+import 'package:employeeapp/main.dart';
 import 'package:employeeapp/screens/register.dart';
 import 'package:employeeapp/utils/styles.dart';
 import 'package:flutter/material.dart';
