@@ -20,7 +20,7 @@ Active releases can be found [here.](https://github.com/DSC-Flutter-PU/Project-A
 > Please choose a task among the following to fix
 ## Active Tasks
 1. Fix Main page
-2. Connect pages to database
+2. Other jobs found in [issues](https://github.com/DSC-Flutter-PU/Project-App/issues/11)
 3. ...
 
 A few resources to get you started if this is your first Flutter project:
