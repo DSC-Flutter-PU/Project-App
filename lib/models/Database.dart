@@ -80,32 +80,27 @@ class DatabaseClient {
   }
 
   Future<int> authenticateUser(String username, String password) async {
-    var count = Sqflite.firstIntValue(await _database.rawQuery(
-        "SELECT COUNT(*) FROM employees where username =?", [username]));
+    List<Employee> employees = new List();
 
-    if (count == 0) {
-      // no user exists with the name in the database
+    List<Map> results = await _database
+        .rawQuery("select * from employees where username = ?", [username]);
+    if (results.isEmpty) {
       throw User404Exception(
           "No user found with the given details, please try again with different credentials.");
+    }
+    results.forEach((s) {
+      Employee emp = new Employee.fromJson(s);
+      employees.add(emp);
+    });
+
+    Employee fetchEmployee = employees.first;
+    if (await matchPassword(password, fetchEmployee.password)) {
+      // successful authentication
+      return 0;
     } else {
-      List<Employee> employees = new List();
-
-      List<Map> results = await _database
-          .rawQuery("select * from employees where username = ?", [username]);
-      results.forEach((s) {
-        Employee emp = new Employee.fromJson(s);
-        employees.add(emp);
-      });
-
-      Employee fetchEmployee = employees.first;
-      if (await matchPassword(password, fetchEmployee.password)) {
-        // successful authentication
-        return 0;
-      } else {
-        // failed to authenticate, confirm details
-        throw User404Exception(
-            "No user found with the given details, please try again with different credentials.");
-      }
+      // failed to authenticate, confirm details
+      throw User404Exception(
+          "No user found with the given details, please try again with different credentials.");
     }
   }
 

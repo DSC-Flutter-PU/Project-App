@@ -19,7 +19,11 @@ class Employee {
   }
 
   // Constructors
-  Employee({
+  // toHash is whether to hash the password or not.
+  // When adding a user to the database, pass it as true,
+  // else, false. i.e When coercing a map from the db to an employee
+  Employee(
+    bool toHash, {
     int id,
     @required String name,
     @required String username,
@@ -40,7 +44,7 @@ class Employee {
 
     this.name = name;
     this.username = username;
-    this.password = hashPassword(password);
+    this.password = toHash ? hashPassword(password) : password;
     this.age = age;
     this.rating = rating != null ? rating : 0;
     this.count = count != null ? count : 0;
@@ -70,12 +74,11 @@ class Employee {
   }
 
   Employee.fromJson(Map data)
-      : this(
+      : this(false,
             id: data['id'],
             name: data['name'],
             username: data['username'],
             password: data['password'],
             age: data['age'],
             rating: data['rating'].toDouble());
-
 }

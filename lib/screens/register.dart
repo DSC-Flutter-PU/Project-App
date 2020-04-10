@@ -1,6 +1,7 @@
 import 'package:employeeapp/models/Database.dart';
 import 'package:employeeapp/models/Employee.dart';
 import 'package:employeeapp/screens/login.dart';
+import 'package:employeeapp/screens/main.dart';
 import 'package:employeeapp/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -41,7 +42,7 @@ class _RegisterState extends State<Register> {
 
   void addUser(String name, String email, String phone, String password) async {
     Employee employee =
-        new Employee(name: name, username: email, password: password, age: 18);
+        new Employee(true, name: name, username: email, password: password, age: 18);
 
     try {
       int status = await databaseClient.addEmployee(employee);
@@ -50,7 +51,9 @@ class _RegisterState extends State<Register> {
         // User successfully added to the database, we can navigate to another page
         // todo save to state
 
-        print("User has been successfully added to db");
+        BuildContext context = scaffoldKey.currentContext;
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => MyHomePage()));
       }
     } on UserExistsException catch (e) {
       print(e.message);
@@ -329,10 +332,6 @@ class _RegisterState extends State<Register> {
 
                             if (databaseClient != null && passwordsCheck())
                               addUser(name, email, phone, password);
-                            scaffoldKey.currentState.showSnackBar(SnackBar(
-                              backgroundColor: Colors.redAccent,
-                              content: Text("The passwords do not match"),
-                            ));
                           },
                           padding: EdgeInsets.all(15.0),
                           shape: RoundedRectangleBorder(

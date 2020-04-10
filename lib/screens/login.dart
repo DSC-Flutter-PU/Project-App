@@ -1,4 +1,5 @@
 import 'package:employeeapp/models/Database.dart';
+import 'package:employeeapp/screens/main.dart';
 import 'package:employeeapp/screens/register.dart';
 import 'package:employeeapp/utils/styles.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,10 @@ class _LoginState extends State<Login> {
       if (status == 0) {
         // user has been successfully authenticated, we can navigate to another page
         // todo save to state
+        BuildContext context = scaffoldKey.currentContext;
+
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => MyHomePage()));
         print("User has been successfully authenticated");
       }
     } on User404Exception catch (e) {
