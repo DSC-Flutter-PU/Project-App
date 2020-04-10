@@ -1,3 +1,14 @@
+// todo, note that this file will have to be converted to FireBase database
+// this is to allow syncing of user data so that the users can login in other
+// devices and sync jobs from our online database.
+// otherwise the other functionality is to create an API that will store the
+// users data and active jobs.
+// Open to ideas and opinions
+
+// -------------------------------
+
+
+
 import "dart:async";
 
 import 'package:employeeapp/models/Employee.dart';
