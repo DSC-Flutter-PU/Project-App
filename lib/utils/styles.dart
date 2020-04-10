@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 
 
-const AppBarTextStyle = TextStyle(
+const appBarTextStyle = TextStyle(
   fontStyle: FontStyle.normal,
   fontWeight: FontWeight.w500,
   fontSize: 20.0,
   color: Colors.white,
 );
 
-const TitleTextStyle = TextStyle(
+const titleTextStyle = TextStyle(
   fontFamily: 'PlayfairDisplay',
   fontWeight: FontWeight.bold,
   fontSize: 30.0,
@@ -17,11 +17,11 @@ const TitleTextStyle = TextStyle(
 );
 
 //Hint texts in the login, signup pages
-const HintTextStyle = TextStyle(
+const hintTextStyle = TextStyle(
   color: Colors.white,
 );
 
 //Textfield in the login, signup pages
-const TextFieldLabelStyle = TextStyle(
+const textFieldLabelStyle = TextStyle(
   color: Colors.white,
 );

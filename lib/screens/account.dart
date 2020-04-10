@@ -1,4 +1,4 @@
-import 'package:employeeapp/data/Employee.dart';
+import 'package:employeeapp/models/Employee.dart';
 import 'package:flutter/material.dart';
 
 class Account extends StatefulWidget {

@@ -1,6 +1,6 @@
 import "dart:async";
 
-import 'package:employeeapp/data/Employee.dart';
+import 'package:employeeapp/models/Employee.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 

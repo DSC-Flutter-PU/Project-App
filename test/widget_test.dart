@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:employeeapp/main.dart';
+import 'package:employeeapp/screens/main.dart';
 
 void main() {
 // comment out tests for a successful build
