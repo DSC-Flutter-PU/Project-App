@@ -1,6 +1,7 @@
 import "dart:async";
 
 import 'package:employeeapp/models/Employee.dart';
+import 'package:employeeapp/services/auth.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -97,7 +98,7 @@ class DatabaseClient {
       });
 
       Employee fetchEmployee = employees.first;
-      if (await fetchEmployee.matchPassword(password, fetchEmployee.password)) {
+      if (await matchPassword(password, fetchEmployee.password)) {
         // successful authentication
         return 0;
       } else {
