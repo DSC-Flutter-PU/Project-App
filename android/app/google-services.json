@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "421411144764",
+    "firebase_url": "https://dsc-employee-app.firebaseio.com",
+    "project_id": "dsc-employee-app",
+    "storage_bucket": "dsc-employee-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:421411144764:android:a9dcd8e7c77e047ee02f39",
+        "android_client_info": {
+          "package_name": "com.flutter.dscpu.employeeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "421411144764-f08ss5vm5jeo8g5mgc8h2p6j447e4pro.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flutter.dscpu.employeeapp",
+            "certificate_hash": "b4f40fabe2e98d03ddd9e7de545b48b9c4735ae4"
+          }
+        },
+        {
+          "client_id": "421411144764-l4rgc4u8c8p8b2qnl9an5v6h26r0ibji.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3UuEulk1ZzFHNNSYyvSaS6qTbWH1vbWw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "421411144764-l4rgc4u8c8p8b2qnl9an5v6h26r0ibji.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

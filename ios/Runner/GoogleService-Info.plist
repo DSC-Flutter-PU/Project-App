@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>421411144764-oatv1dd4cga2nm0qj803i9iijvqv1c6g.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.421411144764-oatv1dd4cga2nm0qj803i9iijvqv1c6g</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>421411144764-f08ss5vm5jeo8g5mgc8h2p6j447e4pro.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAXOEYzkBYQv-_DOo9lsJqY3cgbg5splS4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>421411144764</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.flutter.dscpu.employeeapp</string>
+	<key>PROJECT_ID</key>
+	<string>dsc-employee-app</string>
+	<key>STORAGE_BUCKET</key>
+	<string>dsc-employee-app.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:421411144764:ios:c03dfa9dcaec199ce02f39</string>
+	<key>DATABASE_URL</key>
+	<string>https://dsc-employee-app.firebaseio.com</string>
+</dict>
+</plist>
