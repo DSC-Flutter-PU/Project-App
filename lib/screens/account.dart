@@ -1,4 +1,4 @@
-import 'package:employeeapp/data/Employee.dart';
+import 'package:employeeapp/models/Employee.dart';
 import 'package:flutter/material.dart';
 
 class Account extends StatefulWidget {
@@ -8,6 +8,7 @@ class Account extends StatefulWidget {
 
 class _AccountState extends State<Account> {
   Employee fakeAccount = new Employee(
+    true,
     name: "Dr Disrespect",
     username: "drdr",
     password: "5dwR422",

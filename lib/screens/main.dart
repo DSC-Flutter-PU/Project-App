@@ -1,7 +1,7 @@
-import 'package:employeeapp/account.dart';
-import 'package:employeeapp/login.dart';
+import 'package:employeeapp/screens/account.dart';
+import 'package:employeeapp/screens/login.dart';
 import 'package:flutter/material.dart';
-import 'styles.dart';
+import '../utils/styles.dart';
 
 import 'register.dart';
 
@@ -17,11 +17,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         appBarTheme: AppBarTheme(
           textTheme: TextTheme(
-            title: AppBarTextStyle,
+            title: appBarTextStyle,
           ),
         ),
         textTheme: TextTheme(
-          title: TitleTextStyle,
+          title: titleTextStyle,
         )
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),

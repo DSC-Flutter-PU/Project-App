@@ -1,6 +1,7 @@
-import 'package:employeeapp/data/Database.dart';
-import 'package:employeeapp/register.dart';
-import 'package:employeeapp/styles.dart';
+import 'package:employeeapp/models/Database.dart';
+import 'package:employeeapp/screens/main.dart';
+import 'package:employeeapp/screens/register.dart';
+import 'package:employeeapp/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -36,6 +37,10 @@ class _LoginState extends State<Login> {
       if (status == 0) {
         // user has been successfully authenticated, we can navigate to another page
         // todo save to state
+        BuildContext context = scaffoldKey.currentContext;
+
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => MyHomePage()));
         print("User has been successfully authenticated");
       }
     } on User404Exception catch (e) {
@@ -91,7 +96,7 @@ class _LoginState extends State<Login> {
                       Container(
                         child: Text(
                           'Sign In',
-                          style: TitleTextStyle,
+                          style: titleTextStyle,
                         ),
                       ),
                       SizedBox(height: 30.0),
@@ -100,7 +105,7 @@ class _LoginState extends State<Login> {
                         children: <Widget>[
                           Text(
                             'Email',
-                            style: TextFieldLabelStyle
+                            style: textFieldLabelStyle
                           ),
                           SizedBox(height: 10.0),
                           Container(
@@ -127,7 +132,7 @@ class _LoginState extends State<Login> {
                                   color: Colors.white,
                                 ),
                                 hintText: 'Enter your Email',
-                                hintStyle: HintTextStyle
+                                hintStyle: hintTextStyle
                               ),
                             ),
                           ),
@@ -139,7 +144,7 @@ class _LoginState extends State<Login> {
                         children: <Widget>[
                           Text(
                             'Password',
-                            style: TextFieldLabelStyle,
+                            style: textFieldLabelStyle,
                           ),
                           SizedBox(height: 10.0),
                           Container(
@@ -166,7 +171,7 @@ class _LoginState extends State<Login> {
                                   color: Colors.white,
                                 ),
                                 hintText: 'Enter your Password',
-                                hintStyle: HintTextStyle,
+                                hintStyle: hintTextStyle,
                               ),
                             ),
                           ),
