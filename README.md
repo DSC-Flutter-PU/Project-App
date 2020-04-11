@@ -1,4 +1,4 @@
-![Test, Build and Release apk](https://github.com/DSC-Flutter-PU/Project-App/workflows/Test,%20Build%20and%20Release%20apk/badge.svg?branch=master)
+[![Codemagic build status](https://api.codemagic.io/apps/5e91138c0fc3d42927aa1593/5e91138c0fc3d42927aa1592/status_badge.svg)](https://codemagic.io/apps/5e91138c0fc3d42927aa1593/5e91138c0fc3d42927aa1592/latest_build)
 
 # APP
 > todo find an app name 
@@ -11,10 +11,6 @@ Employee app project for Developer Student Clubs PU.
 3. Work on a non-master branch
 4. Push the code, and create a Pull Request.
 5. Your code will be merged shortly. 
-
-Your code might show failing on the Actions, this might be mainly due to the commit having no tag,
-No problemo, it will be fixed.
-Active releases can be found [here.](https://github.com/DSC-Flutter-PU/Project-App/releases)
 
 
 > Please choose a task among the following to fix
