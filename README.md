@@ -1,4 +1,4 @@
-![Test, Build and Release apk](https://github.com/DSC-Flutter-PU/Project-App/workflows/Test,%20Build%20and%20Release%20apk/badge.svg)
+![Test, Build and Release apk](![Test, Build and Release apk](https://github.com/DSC-Flutter-PU/Project-App/workflows/Test,%20Build%20and%20Release%20apk/badge.svg?branch=master))
 
 # APP
 > todo find an app name 
