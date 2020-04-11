@@ -8,10 +8,8 @@ class Account extends StatefulWidget {
 
 class _AccountState extends State<Account> {
   Employee fakeAccount = new Employee(
-    true,
     name: "Dr Disrespect",
     username: "drdr",
-    password: "5dwR422",
     age: 22,
     rating: 4.2,
     count: 2,

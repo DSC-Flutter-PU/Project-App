@@ -1,53 +1,41 @@
-import 'package:employeeapp/models/Database.dart';
-import 'package:employeeapp/main.dart';
 import 'package:employeeapp/screens/register.dart';
+import 'package:employeeapp/services/authentication.dart';
 import 'package:employeeapp/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class Login extends StatefulWidget {
+  Login({this.auth, this.loginCallback});
+
+  final BaseAuth auth;
+  final VoidCallback loginCallback;
+
   @override
   _LoginState createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
-  DatabaseClient databaseClient;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   bool _rememberME = false;
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-
-    if (databaseClient == null) {
-      DatabaseClient db = new DatabaseClient();
-      db.create();
-
-      databaseClient = db;
-      if (!mounted) setState(() {});
-    }
-  }
 
   void auth(String email, String password) async {
+    String userId = "";
+
     try {
-      int status = await databaseClient.authenticateUser(email, password);
+      userId = await widget.auth.signIn(email, password);
+      print('Signed in: $userId');
 
-      if (status == 0) {
-        // user has been successfully authenticated, we can navigate to another page
-        // todo save to state
-        BuildContext context = scaffoldKey.currentContext;
-
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MyHomePage()));
-        print("User has been successfully authenticated");
+      if (userId.length > 0 && userId != null) {
+        widget.loginCallback();
       }
-    } on User404Exception catch (e) {
-      print(e.message);
+    } catch (e) {
+      print('Error: $e');
 
       scaffoldKey.currentState.showSnackBar(SnackBar(
-        backgroundColor:  Colors.redAccent,
+        backgroundColor: Colors.redAccent,
         content: Text(
           e.message,
           style: TextStyle(color: Colors.white),
@@ -103,10 +91,7 @@ class _LoginState extends State<Login> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(
-                            'Email',
-                            style: textFieldLabelStyle
-                          ),
+                          Text('Email', style: textFieldLabelStyle),
                           SizedBox(height: 10.0),
                           Container(
                             alignment: Alignment.centerLeft,
@@ -120,20 +105,19 @@ class _LoginState extends State<Login> {
                               keyboardType: TextInputType.emailAddress,
                               style: TextStyle(color: Colors.white),
                               decoration: InputDecoration(
-                                border: InputBorder.none,
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
+                                  border: InputBorder.none,
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  contentPadding: EdgeInsets.only(top: 14.0),
+                                  prefixIcon: Icon(
+                                    Icons.email,
                                     color: Colors.white,
                                   ),
-                                ),
-                                contentPadding: EdgeInsets.only(top: 14.0),
-                                prefixIcon: Icon(
-                                  Icons.email,
-                                  color: Colors.white,
-                                ),
-                                hintText: 'Enter your Email',
-                                hintStyle: hintTextStyle
-                              ),
+                                  hintText: 'Enter your Email',
+                                  hintStyle: hintTextStyle),
                             ),
                           ),
                         ],
@@ -223,13 +207,10 @@ class _LoginState extends State<Login> {
                         child: RaisedButton(
                           elevation: 10.0,
                           onPressed: () {
-                            String email = emailController.text;
+                            String email = emailController.text.trim();
                             String password = passwordController.text;
 
-                            // todo perform further checks before inserting to db
-                            if (databaseClient != null) {
-                              auth(email, password);
-                            }
+                            auth(email, password);
                           },
                           padding: EdgeInsets.all(15.0),
                           shape: RoundedRectangleBorder(
@@ -278,7 +259,10 @@ class _LoginState extends State<Login> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Register()));
+                                  builder: (context) => Register(
+                                        auth: widget.auth,
+                                        loginCallback: widget.loginCallback,
+                                      )));
                         },
                         child: RichText(
                           text: TextSpan(children: [
