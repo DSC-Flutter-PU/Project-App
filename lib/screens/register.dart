@@ -1,19 +1,18 @@
-import 'package:employeeapp/models/Database.dart';
-import 'package:employeeapp/models/Employee.dart';
-import 'package:employeeapp/screens/login.dart';
-import 'package:employeeapp/screens/main.dart';
+import 'package:employeeapp/services/authentication.dart';
 import 'package:employeeapp/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-
 class Register extends StatefulWidget {
+  Register({this.auth});
+
+  final BaseAuth auth;
+
   @override
   _RegisterState createState() => _RegisterState();
 }
 
 class _RegisterState extends State<Register> {
-  DatabaseClient databaseClient;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController nameController = new TextEditingController();
   TextEditingController emailController = new TextEditingController();
@@ -22,41 +21,19 @@ class _RegisterState extends State<Register> {
   TextEditingController confPasswordController = new TextEditingController();
   bool passMatch = false;
 
-  @override
-  void initState() {
-    super.initState();
-
-    if (databaseClient == null) {
-      DatabaseClient db = new DatabaseClient();
-      db.create();
-
-      databaseClient = db;
-      if (mounted) setState(() {});
-    }
-  }
-
   // call this method to check if the passwords fields match
   bool passwordsCheck() =>
       passwordController.text == confPasswordController.text;
 
-
   void addUser(String name, String email, String phone, String password) async {
-    Employee employee =
-        new Employee(true, name: name, username: email, password: password, age: 18);
-
     try {
-      int status = await databaseClient.addEmployee(employee);
+      String userId = await widget.auth.signUp(email, password);
+      print('Signed up user: $userId');
 
-      if (status != null) {
-        // User successfully added to the database, we can navigate to another page
-        // todo save to state
-
-        BuildContext context = scaffoldKey.currentContext;
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MyHomePage()));
-      }
-    } on UserExistsException catch (e) {
-      print(e.message);
+      BuildContext context = scaffoldKey.currentContext;
+      Navigator.pop(context);
+    } catch (e) {
+      print('Error: $e');
 
       scaffoldKey.currentState.showSnackBar(SnackBar(
         backgroundColor: Colors.redAccent,
@@ -107,19 +84,13 @@ class _RegisterState extends State<Register> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Container(
-                        child: Text(
-                          'Register',
-                          style: titleTextStyle
-                        ),
+                        child: Text('Register', style: titleTextStyle),
                       ),
                       SizedBox(height: 20.0),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(
-                            'Names',
-                            style: textFieldLabelStyle
-                          ),
+                          Text('Names', style: textFieldLabelStyle),
                           SizedBox(height: 10.0),
                           Container(
                             alignment: Alignment.centerLeft,
@@ -153,10 +124,7 @@ class _RegisterState extends State<Register> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(
-                            'Email',
-                            style: textFieldLabelStyle
-                          ),
+                          Text('Email', style: textFieldLabelStyle),
                           SizedBox(height: 10.0),
                           Container(
                             alignment: Alignment.centerLeft,
@@ -190,10 +158,7 @@ class _RegisterState extends State<Register> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(
-                            'Phone',
-                            style: textFieldLabelStyle
-                          ),
+                          Text('Phone', style: textFieldLabelStyle),
                           SizedBox(height: 10.0),
                           Container(
                             alignment: Alignment.centerLeft,
@@ -237,7 +202,7 @@ class _RegisterState extends State<Register> {
                             height: 50.0,
                             child: TextField(
                               controller: passwordController,
-                              onChanged: (String td){
+                              onChanged: (String td) {
                                 setState(() {
                                   passwordsCheck()
                                       ? passMatch = false
@@ -326,11 +291,11 @@ class _RegisterState extends State<Register> {
                           elevation: 10.0,
                           onPressed: () {
                             String name = nameController.text;
-                            String email = emailController.text;
+                            String email = emailController.text.trim();
                             String phone = phoneController.text;
                             String password = passwordController.text;
 
-                            if (databaseClient != null && passwordsCheck())
+                            if (passwordsCheck())
                               addUser(name, email, phone, password);
                           },
                           padding: EdgeInsets.all(15.0),
@@ -352,8 +317,7 @@ class _RegisterState extends State<Register> {
                       SizedBox(height: 15.0),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Login()));
+                          Navigator.pop(context);
                         },
                         child: RichText(
                           text: TextSpan(children: [

@@ -1,11 +1,9 @@
-import 'package:employeeapp/services/auth.dart';
 import 'package:flutter/cupertino.dart';
 
 class Employee {
   int id;
   String name;
   String username;
-  String password;
   int age;
   double rating;
   int count; // Number of people who have rated the user
@@ -22,12 +20,10 @@ class Employee {
   // toHash is whether to hash the password or not.
   // When adding a user to the database, pass it as true,
   // else, false. i.e When coercing a map from the db to an employee
-  Employee(
-    bool toHash, {
+  Employee({
     int id,
     @required String name,
     @required String username,
-    @required String password,
     @required int age,
     double rating,
     int count,
@@ -36,15 +32,12 @@ class Employee {
       return;
     } else if (username == null || username == null) {
       return;
-    } else if (password == null || password == null) {
-      return;
     } else if (age == null || age < 18) {
       return;
     }
 
     this.name = name;
     this.username = username;
-    this.password = toHash ? hashPassword(password) : password;
     this.age = age;
     this.rating = rating != null ? rating : 0;
     this.count = count != null ? count : 0;
@@ -65,7 +58,6 @@ class Employee {
       'id': id,
       'name': name,
       'username': username,
-      'password': password,
       'age': age,
       'rating': rating,
       'count': count,
@@ -74,11 +66,10 @@ class Employee {
   }
 
   Employee.fromJson(Map data)
-      : this(false,
+      : this(
             id: data['id'],
             name: data['name'],
             username: data['username'],
-            password: data['password'],
             age: data['age'],
             rating: data['rating'].toDouble());
 }

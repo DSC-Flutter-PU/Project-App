@@ -1,38 +1,14 @@
 import 'package:employeeapp/screens/account.dart';
-import 'package:employeeapp/screens/login.dart';
+import 'package:employeeapp/services/authentication.dart';
 import 'package:flutter/material.dart';
-import '../utils/styles.dart';
-
-import 'register.dart';
-
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        appBarTheme: AppBarTheme(
-          textTheme: TextTheme(
-            title: appBarTextStyle,
-          ),
-        ),
-        textTheme: TextTheme(
-          title: titleTextStyle,
-        )
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key key, this.auth, this.userId, this.logoutCallback})
+      : super(key: key);
 
-  final String title;
+  final BaseAuth auth;
+  final VoidCallback logoutCallback;
+  final String userId;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -74,50 +50,10 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
-      drawer: Drawer(
-        child: Column(
-//          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            DrawerHeader(
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50.0),
-                ),
-                child: Image.asset(
-                  "images/dr.jpeg",
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            RaisedButton(
-              child: Text("Login"),
-              onPressed: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Login()));
-              },
-            ),
-            RaisedButton(
-              child: Text("Register"),
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Register()));
-              },
-            )
-          ],
-        ),
-      ),
       body: Container(
         child: ListView.builder(
           itemBuilder: ((BuildContext context, int index) {
             return ListTile(
-              leading: Text(
-                (index + 1).toString(),
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 22.0,
-                ),
-              ),
               title: Text(
                 jobs[index]["name"],
                 style: TextStyle(
