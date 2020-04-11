@@ -20,7 +20,6 @@ class _LoginState extends State<Login> {
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
 
-
   void auth(String email, String password) async {
     String userId = "";
 
@@ -261,7 +260,6 @@ class _LoginState extends State<Login> {
                               MaterialPageRoute(
                                   builder: (context) => Register(
                                         auth: widget.auth,
-                                        loginCallback: widget.loginCallback,
                                       )));
                         },
                         child: RichText(

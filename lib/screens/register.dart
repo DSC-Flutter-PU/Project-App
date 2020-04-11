@@ -1,14 +1,12 @@
-import 'package:employeeapp/screens/login.dart';
 import 'package:employeeapp/services/authentication.dart';
 import 'package:employeeapp/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class Register extends StatefulWidget {
-  Register({this.auth, this.loginCallback});
+  Register({this.auth});
 
   final BaseAuth auth;
-  final VoidCallback loginCallback;
 
   @override
   _RegisterState createState() => _RegisterState();
@@ -31,6 +29,9 @@ class _RegisterState extends State<Register> {
     try {
       String userId = await widget.auth.signUp(email, password);
       print('Signed up user: $userId');
+
+      BuildContext context = scaffoldKey.currentContext;
+      Navigator.pop(context);
     } catch (e) {
       print('Error: $e');
 
@@ -316,13 +317,7 @@ class _RegisterState extends State<Register> {
                       SizedBox(height: 15.0),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Login(
-                                        auth: widget.auth,
-                                        loginCallback: widget.loginCallback,
-                                      )));
+                          Navigator.pop(context);
                         },
                         child: RichText(
                           text: TextSpan(children: [
