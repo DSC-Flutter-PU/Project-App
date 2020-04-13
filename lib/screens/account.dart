@@ -25,22 +25,29 @@ class _AccountState extends State<Account> {
         child: Padding(
           padding: EdgeInsets.all(10.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Container(
+                height: 250.0,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50.0),
-                ),
-                child: Image.asset("images/dr.jpeg"),
+                  image: DecorationImage(
+                    alignment: Alignment.center,
+                    image: AssetImage('images/dr.jpeg'),
+                    fit: BoxFit.cover,
+                    ),
+                  ),
               ),
               SizedBox(
-                height: 15.0,
+                height: 25.0,
               ),
+              Divider(indent: 10.0, endIndent: 10.0, thickness: 2.0,),
               ListTile(
                 leading: Icon(Icons.person),
                 title: Row(
                   children: <Widget>[
                     Text(
-                      "Name",
+                      "Name:",
                       style: TextStyle(fontSize: 22.0),
                     ),
                     SizedBox(
@@ -60,7 +67,7 @@ class _AccountState extends State<Account> {
                 title: Row(
                   children: <Widget>[
                     Text(
-                      "Rating",
+                      "Rating:",
                       style: TextStyle(
                         fontSize: 22.0,
                       ),
@@ -77,8 +84,28 @@ class _AccountState extends State<Account> {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 30.0,
+
+                ListTile(
+                leading: Icon(Icons.assignment_turned_in),
+                title: Row(
+                  children: <Widget>[
+                    Text(
+                      "Jobs Completed:",
+                      style: TextStyle(
+                        fontSize: 22.0,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 15.0,
+                    ),
+                    Text(
+                      '2',
+                      style: TextStyle(
+                        fontSize: 22.0,
+                      ),
+                    )
+                  ],
+                ),
               ),
             ],
           ),
