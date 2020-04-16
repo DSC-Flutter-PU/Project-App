@@ -53,29 +53,41 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Container(
         child: ListView.builder(
           itemBuilder: ((BuildContext context, int index) {
-            return ListTile(
-              title: Text(
-                jobs[index]["name"],
-                style: TextStyle(
+            return Container(
+              height: 150.0,
+              child: Card(
+                elevation: 10.0,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      jobs[index]["name"],
+                      style: TextStyle(
                   color: Colors.black,
                   fontSize: 22.0,
-                ),
-              ),
-              subtitle: Text(
+                      )
+                    ),
+                    Text(
                 jobs[index]["description"],
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 22.0,
                 ),
-              ),
-              trailing: Text(
+              ),   
+                    Text(
                 jobs[index]["date"],
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.black45,
                   fontSize: 22.0,
                 ),
               ),
-              onTap: () {},
+              
+                  ],
+                )
+                
+
+              )
             );
           }),
           itemCount: jobs.length,

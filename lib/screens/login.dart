@@ -1,3 +1,4 @@
+import 'package:employeeapp/constants/loader.dart';
 import 'package:employeeapp/screens/register.dart';
 import 'package:employeeapp/services/authentication.dart';
 import 'package:employeeapp/utils/styles.dart';
@@ -9,6 +10,7 @@ class Login extends StatefulWidget {
 
   final BaseAuth auth;
   final VoidCallback loginCallback;
+  final loading = false;
 
   @override
   _LoginState createState() => _LoginState();
@@ -17,6 +19,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   bool _rememberME = false;
+  bool _loading = false;
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
 
@@ -45,7 +48,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return _loading ? Load() : Scaffold(
       key: scaffoldKey,
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
@@ -208,6 +211,7 @@ class _LoginState extends State<Login> {
                           onPressed: () {
                             String email = emailController.text.trim();
                             String password = passwordController.text;
+                            setState(() => _loading = true);
 
                             auth(email, password);
                           },
