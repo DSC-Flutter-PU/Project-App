@@ -1,4 +1,5 @@
 import 'package:employeeapp/models/Employee.dart';
+import 'package:employeeapp/services/authentication.dart';
 import 'package:flutter/material.dart';
 
 class Account extends StatefulWidget {
@@ -7,6 +8,7 @@ class Account extends StatefulWidget {
 }
 
 class _AccountState extends State<Account> {
+  Auth _auth = Auth();
   Employee fakeAccount = new Employee(
     name: "Dr Disrespect",
     username: "drdr",
@@ -35,13 +37,17 @@ class _AccountState extends State<Account> {
                     alignment: Alignment.center,
                     image: AssetImage('images/dr.jpeg'),
                     fit: BoxFit.cover,
-                    ),
                   ),
+                ),
               ),
               SizedBox(
                 height: 25.0,
               ),
-              Divider(indent: 10.0, endIndent: 10.0, thickness: 2.0,),
+              Divider(
+                indent: 10.0,
+                endIndent: 10.0,
+                thickness: 2.0,
+              ),
               ListTile(
                 leading: Icon(Icons.person),
                 title: Row(
@@ -84,8 +90,7 @@ class _AccountState extends State<Account> {
                   ],
                 ),
               ),
-
-                ListTile(
+              ListTile(
                 leading: Icon(Icons.assignment_turned_in),
                 title: Row(
                   children: <Widget>[
@@ -104,6 +109,38 @@ class _AccountState extends State<Account> {
                         fontSize: 22.0,
                       ),
                     )
+                  ],
+                ),
+              ),
+              Divider(),
+              GestureDetector(
+                onTap: () {
+                  _auth.signOut();
+                },
+                child: ListTile(
+                  leading: Icon(Icons.exit_to_app),
+                  title: Row(
+                    children: <Widget>[
+                      Text(
+                        "Logout",
+                        style: TextStyle(
+                          fontSize: 22.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              ListTile(
+                leading: Icon(Icons.settings),
+                title: Row(
+                  children: <Widget>[
+                    Text(
+                      "Settings",
+                      style: TextStyle(
+                        fontSize: 22.0,
+                      ),
+                    ),
                   ],
                 ),
               ),
